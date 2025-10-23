@@ -7,19 +7,59 @@
  * No new nodes should be allocated - only pointers should be changed.
  */
 
-#include "exercise2.h"
+#include "include/exercise2.h"
 
-/* 
- * Sort a singly linked list in-place using insertion sort
- * list: pointer to the first node of the list
- * 
- * The function should sort the list by rearranging pointers,
- * not by creating new nodes or swapping data values.
- * Returns pointer to the new head of the sorted list.
- */
 node* isort(node* list) {
-    return NULL; // Placeholder implementation
+
+    node * head = list;
+    node * curr_node = head;
+    node * prior_node;
+    node * temp;
+
+    while (curr_node->next != NULL){
+        
+        if (curr_node->next->data < curr_node->data){
+            temp = curr_node->next;
+            curr_node->next = curr_node->next->next;
+
+            if (temp->data <= head->data){ // if node is less than first in list
+                temp->next = head;
+                head = temp;
+            }
+
+            else{
+
+                curr_node = head->next;
+                prior_node = head;
+
+                while(curr_node->next != NULL){
+
+                    if (temp->data < curr_node->data){
+                        prior_node->next = temp;
+                        temp->next = curr_node;
+                        break;
+                    }
+
+                    prior_node = curr_node;
+                    curr_node = curr_node->next;
+                }
+
+                if (curr_node->next == NULL){
+                    prior_node->next = temp;
+                    temp->next = curr_node;
+                }
+            }
+        }
+        else{
+            curr_node = curr_node->next;
+
+        }
+
+
+    }
+    return head; // Placeholder implementation
 }
+
 
 /* Helper function to print the list */
 void print_list(node* list) {

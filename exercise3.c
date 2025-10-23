@@ -16,6 +16,11 @@
  */
 void initialize(queue *q) {
     /* TODO: Initialize the queue */
+
+    q->front=NULL;
+    q->rear=NULL;
+    q->count = 0;
+
 }
 
 /* 
@@ -28,6 +33,24 @@ void initialize(queue *q) {
  */
 void enqueue(queue *q, int x) {
     /* TODO: Implement enqueue */
+
+    // make new node for queue
+    node * ny_node = (node *) malloc(sizeof(node));
+    ny_node->data = x;
+    ny_node->next = NULL;
+
+
+    if (empty(q)){
+        q->front = ny_node;
+        q->rear = ny_node;
+        q->count += 1;
+    }
+    else{
+        q->rear->next = ny_node;
+        q->rear = ny_node;
+        q->count += 1;
+    }
+
 }
 
 /* 
@@ -39,7 +62,15 @@ void enqueue(queue *q, int x) {
  */
 int dequeue(queue *q) {
     /* TODO: Implement dequeue */
-    return 0;  
+
+    assert(q->count > 0);
+
+    int curr = q->front->data;
+
+    q->front = q->front->next;
+    q->count -= 1;
+
+    return curr;
 }
 
 /* 
@@ -49,7 +80,9 @@ int dequeue(queue *q) {
  */
 bool empty(const queue *q) {
     /* TODO: Implement empty check */
-    return false; 
+
+    return q->count == 0;
+
 }
 
 /* 

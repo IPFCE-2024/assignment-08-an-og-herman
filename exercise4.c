@@ -7,7 +7,7 @@
  * This demonstrates the concept of information hiding.
  */
 
-#include "exercise4.h"
+#include "include/exercise4.h"
 
 /* 
  * Stack operations from Assignment 7
@@ -64,6 +64,11 @@ bool full(stack *s) {
  */
 void init_queue(queue *q) {
     /* TODO: initialize queue */
+    q->s1 = *(stack *)malloc(sizeof(stack));
+    q->s2 = *(stack *)malloc(sizeof(stack));
+    
+    q->s1.head = NULL;
+    q->s2.head = NULL;
 }
 
 /* 
@@ -73,6 +78,7 @@ void init_queue(queue *q) {
  */
 void enqueue(queue *q, int x) {
     /* TODO: Implement enqueue using ONLY stack operations */
+    push(&(q->s1), x);
 }
 
 /* 
@@ -81,8 +87,22 @@ void enqueue(queue *q, int x) {
  */
 int dequeue(queue *q) {
     /* TODO: Implement dequeue using ONLY stack operations */
-    
-    return 0;  // TODO: Replace with actual implementation
+    int curr;
+    int res;
+    while (!empty(&(q->s1))){
+        curr = pop(&(q->s1));
+        push(&(q->s2), curr);
+    }
+
+    res = pop(&(q->s2));
+
+    while(!empty(&(q->s2))){
+        curr = pop(&(q->s2));
+        push(&(q->s1), curr);
+
+    }
+
+    return res;  // TODO: Replace with actual implementation
 }
 
 /* 
@@ -91,8 +111,7 @@ int dequeue(queue *q) {
  * Returns: true if both stacks are empty, false otherwise
  */
 bool queue_empty(queue *q) {
-    /* TODO: Implement using ONLY stack operations */
-    return false;  // TODO: Replace with actual implementation
+    return q->s1.head == NULL;
 }
 
 /* 
@@ -148,4 +167,3 @@ void print_queue(queue *q) {
     
     printf("\n");
 }
-
