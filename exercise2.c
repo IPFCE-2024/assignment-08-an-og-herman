@@ -16,18 +16,20 @@ node* isort(node* list) {
     node * prior_node;
     node * temp;
 
-    while (curr_node->next != NULL){
+    while (curr_node->next != NULL){ // kører så længe der findes en næste node
         
-        if (curr_node->next->data < curr_node->data){
-            temp = curr_node->next;
-            curr_node->next = curr_node->next->next;
+        if (curr_node->next->data < curr_node->data){ // hvis den næste node har en værdi mindre end den node vi kigger på
+            temp = curr_node->next; // gem noden
+            curr_node->next = curr_node->next->next; // gør klar til næste runde
 
-            if (temp->data <= head->data){ // if node is less than first in list
+
+            // vi sætter nu noden ind
+            if (temp->data <= head->data){  // hvis noden er mindre end første node
                 temp->next = head;
                 head = temp;
             }
 
-            else{
+            else{ // hvis den ikke er mindre end første skal vi finde hvor i listen den skal ligge
 
                 curr_node = head->next;
                 prior_node = head;
@@ -44,7 +46,7 @@ node* isort(node* list) {
                     curr_node = curr_node->next;
                 }
 
-                if (curr_node->next == NULL){
+                if (curr_node->next == NULL){ // hvis noden der skal indsættes er den anden største i listen
                     prior_node->next = temp;
                     temp->next = curr_node;
                 }
@@ -52,10 +54,7 @@ node* isort(node* list) {
         }
         else{
             curr_node = curr_node->next;
-
         }
-
-
     }
     return head; // Placeholder implementation
 }

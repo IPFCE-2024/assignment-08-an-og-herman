@@ -40,12 +40,12 @@ void enqueue(queue *q, int x) {
     ny_node->next = NULL;
 
 
-    if (empty(q)){
+    if (empty(q)){ // hvis listen er tom
         q->front = ny_node;
         q->rear = ny_node;
         q->count += 1;
     }
-    else{
+    else{   // hvis listen ikke er tom
         q->rear->next = ny_node;
         q->rear = ny_node;
         q->count += 1;
@@ -63,7 +63,7 @@ void enqueue(queue *q, int x) {
 int dequeue(queue *q) {
     /* TODO: Implement dequeue */
 
-    assert(q->count > 0);
+    assert(q->count > 0); // listen må ikke være tom
 
     int curr = q->front->data;
 

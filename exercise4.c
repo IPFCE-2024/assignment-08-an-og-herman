@@ -21,7 +21,7 @@ void initialize(stack *s) {
 
 /* Push an element onto the stack */
 void push(stack *s, int e) {
-    node *new_node = (node*)malloc(sizeof(node));
+    node *new_node = (node*)malloc(sizeof(node)); 
     if (new_node != NULL) {
         new_node->data = e;
         new_node->next = s->head;
@@ -89,14 +89,14 @@ int dequeue(queue *q) {
     /* TODO: Implement dequeue using ONLY stack operations */
     int curr;
     int res;
-    while (!empty(&(q->s1))){
+    while (!empty(&(q->s1))){ // pop så længe der er noder i s1 og push til s2
         curr = pop(&(q->s1));
         push(&(q->s2), curr);
     }
 
-    res = pop(&(q->s2));
+    res = pop(&(q->s2)); // fjern den nederste som nu er øverst i s2
 
-    while(!empty(&(q->s2))){
+    while(!empty(&(q->s2))){ // pop så længe der er noder i s2 og push til s2
         curr = pop(&(q->s2));
         push(&(q->s1), curr);
 
