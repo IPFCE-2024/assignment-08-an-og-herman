@@ -6,7 +6,7 @@
  * The queue should maintain FIFO (First-In, First-Out) order.
  */
 
-#include "exercise3.h"
+#include "include/exercise3.h"
 
 /* 
  * Initialize an empty queue
